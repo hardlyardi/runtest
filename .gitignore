@@ -1,0 +1,21 @@
+# Rojo Sourcemap
+/sourcemap.json
+
+# Test Suite
+_SUITE/**
+
+# Place files
+**.rbxl*
+
+# Pesde
+**/luau_packages/
+**/lune_packages/
+**/roblox_packages/
+**/.pesde
+**/pesde.lock
+
+# Lock files
+**.lock
+
+# node_modules
+node_modules/

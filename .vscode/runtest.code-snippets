@@ -1,0 +1,69 @@
+{
+    "Test Spec File": {
+        "prefix": "!spec",
+        "body": [
+            "local runtest = require(\"@runtest/\")",
+            "",
+            "type TestInterface = runtest.TestInterface",
+            "",
+            "local spec = runtest.test.spec.init(...)",
+            "",
+            "spec.test(\"$1\", function(interface: TestInterface)",
+            "\t$0",
+            "end)",
+            "",
+            "return spec.done()"
+        ]
+    },
+    "Test": {
+        "prefix": ";test",
+        "body": [
+            "spec.test(\"$1\", function(interface: TestInterface)",
+            "\t$0",
+            "end)",
+        ]
+    },
+    "Benchmark File": {
+        "prefix": "!bench",
+        "body": [
+            "local runtest = require(\"@runtest/\")",
+            "",
+            "-- Parameter Generator",
+            "local bench = runtest.test.bench.init(..., function()",
+            "\treturn $3",
+            "end)",
+            "",
+            "local iterate = bench.profiler(\"iterate\")",
+            "",
+            "bench.profile(\"$1\", function($4)",
+            "\titerate.open()",
+            "\tfor _ = 1, 100 do",
+            "\t\t$0",
+            "\tend",
+            "\titerate.close()",
+            "end)",
+            "",
+            "bench.profile(\"$2\", function($5)",
+            "\titerate.open()",
+            "\tfor _ = 1, 100 do",
+            "\t\t$0",
+            "\tend",
+            "\titerate.close()",
+            "end)",
+            "",
+            "return bench.done()"
+        ]
+    },
+    "Profile": {
+        "prefix": ";profile",
+        "body": [
+            "bench.profile(\"$1\", function($2)",
+            "\titerate.open()",
+            "\tfor _ = 1, 100 do",
+            "\t\t$0",
+            "\tend",
+            "\titerate.close()",
+            "end)",
+        ]
+    },
+}
