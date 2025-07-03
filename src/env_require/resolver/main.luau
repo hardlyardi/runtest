@@ -28,7 +28,7 @@ local ALIAS_PATTERN = `^@(.+)`
 local FILENAME_PATTERN = `[/\\]?([^/\\]+)$`
 
 local filesystem_path = require("../../utils/filesystem_path/main")
-local get_aliases = require("@self/get_aliases")
+local get_aliases = require("./get_aliases")
 local pretty_print = require("../../utils/pretty_print/main")
 local process = require("@lune/process")
 local resolver_types = require("./types")

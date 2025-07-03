@@ -48,8 +48,8 @@ export type LoadedSpec = spec_types.LoadedSpec
 export type SpecInterface = spec_types.SpecInterface
 export type TestInterface = test_types.TestInterface
 export type CompletedSpec = spec_runner_types.CompletedSpec
-
 export type ProfileInterface = profile_types.ProfileInterface
+export type FilesystemHierarchy<T = true> = filesystem_hierarchy.Identity
 
 return {
 	run = {

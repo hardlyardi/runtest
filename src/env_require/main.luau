@@ -27,7 +27,7 @@ SOFTWARE.
 local filesystem = require("@lune/fs")
 local luau = require("@lune/luau")
 local resolver = require("../env_require/resolver/main")
-local resolver_types = require("@self/resolver/types")
+local resolver_types = require("./resolver/types")
 
 type RequireAliases = resolver_types.RequireAliases
 

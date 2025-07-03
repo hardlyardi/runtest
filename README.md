@@ -64,7 +64,7 @@ local runtest = require("@runtest/")
 local serdes = require("@lune/serde")
 
 type CompletedSpec = runtest.CompletedSpec
-type FilesystemHierarchy<T = true> = filesystem_hierarchy.Identity<T>
+type FilesystemHierarchy<T = true> = runtest.FilesystemHierarchy<T>
 
 local run = runtest.run
 local style = runtest.util.style
