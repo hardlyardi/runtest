@@ -1,6 +1,6 @@
 # Runtest
 
-Runtest is an advanced testing framework designed for easily constructing "airtight" testing environments in lune.
+Runtest is a testing framework designed for easily constructing robust testing environments in lune.
 
 `example.spec.luau`
 
@@ -16,11 +16,10 @@ local pprint = runtest.util.style.print.from_epsilon
 local value
 
 spec.test("foo", function(interface)
-    local function timeout()
+    local timeout = task.delay(5, function()
         interface:fail("timeout exceeded")
         interface:early_end()
-    end
-    task.delay(5, timeout)
+    end)
 
     assert(not value)
     value = { 0.001 }
@@ -31,12 +30,13 @@ spec.test("foo", function(interface)
     interface:expect_not_equal(value, {}, EPSILON)
     interface:expect_truthy(true)
     interface:expect_falsy(false)
+    task.cancel(timeout)
 end)
 
 spec.test("bar", function(interface)
     -- every test function in the spec runs in a completely unique environment! you can put in all kinds of statefulness
     -- or boilerplate, and the tests will remain sound.
-    interface:expect_falsy(not value)
+    assert(not value)
     value = { 0.001 }
     interface:output(pprint(value))
     interface:output_no_newline("\n:3c")
@@ -50,8 +50,8 @@ end)
 return spec.done()
 ```
 
-To make some of the magic happen, a "runner" is needed. Runtest's design scope is to run tests, so, apart from styling,
-you roll your own testing suite. Should look something like this:
+To make some of the magic happen, a "runner" is needed. Runtest's design scope is pretty much.. to run tests, so, apart
+from styling, you need to roll your own testing suite. Should look something like this:
 
 ```luau
 local SPEC_DIRECTORY = "./tests/_specs"
