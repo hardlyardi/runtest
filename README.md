@@ -34,8 +34,8 @@ spec.test("foo", function(interface)
 end)
 
 spec.test("bar", function(interface)
-    -- every test function in the spec runs in a completely unique environment! you can put in all kinds of statefulness
-    -- or boilerplate, and the tests will remain sound.
+    -- every test function in the spec runs in a completely unique environment! you can put in all
+    -- kinds of statefulness or boilerplate, and the tests will remain sound.
     assert(not value)
     value = { 0.001 }
     interface:output(pprint(value))
