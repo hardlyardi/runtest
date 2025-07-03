@@ -10,13 +10,12 @@ local EPSILON = 0.001
 local runtest = require("@runtest/")
 local task = require("@lune/task")
 
-type TestInterface = runtest.TestInterface
-
 local spec = runtest.test.spec.init(...)
+local pprint = runtest.util.style.print.from_epsilon
 
 local value
 
-spec.test("foo", function(interface: TestInterface)
+spec.test("foo", function(interface)
     local function timeout()
         interface:fail("timeout exceeded")
         interface:early_end()
@@ -34,13 +33,18 @@ spec.test("foo", function(interface: TestInterface)
     interface:expect_falsy(false)
 end)
 
-spec.test("bar", function(interface: TestInterface)
+spec.test("bar", function(interface)
     -- every test function in the spec runs in a completely unique environment! you can put in all kinds of statefulness
     -- or boilerplate, and the tests will remain sound.
-    assert(not value)
+    interface:expect_falsy(not value)
     value = { 0.001 }
-    interface:output(runtest.pretty_print.from_epsilon(value))
+    interface:output(pprint(value))
     interface:output_no_newline("\n:3c")
+end)
+
+spec.test("oh no", function(interface)
+    -- Tests can even error or cause problems! They'll all still run the same way.
+    error(">:3")
 end)
 
 return spec.done()
