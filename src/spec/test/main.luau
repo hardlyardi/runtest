@@ -18,21 +18,25 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ]]
+--[[
+--FOR DESCRIPTIONS OF API & CODE FUNCTION, ETC: https://light.ardi.gg/
+--FOR ISSUES, BUG REPORTS, OR FEATURE REQUESTS: https://light.ardi.gg/github
+--ROBLOX OSS SERVER: https://discord.com/invite/5KjV64PA3d
+--MY DISCORD (please only contact for important questions): https://discord.com/users/331399684415553538/
+]]
 local spec_runner_types = require("../../spec/runner/types")
 local spec_types = require("../../spec/types")
 local test_types = require("../../spec/test/types")
 
 type TestInterface = test_types.TestInterface
 type TestDefinition = test_types.TestDefinition
+type SpecInterface = spec_types.SpecInterface
 type LoadedSpec = spec_types.LoadedSpec
 type SpecRunner = spec_runner_types.SpecRunner
 
 local using_runner: SpecRunner
 local initialized = false
-local function init(passed_runner: SpecRunner): {
-	test: (name: string, definition: TestDefinition) -> (),
-	done: () -> LoadedSpec,
-}
+local function init(passed_runner: SpecRunner): SpecInterface
 	if initialized then
 		error(debug.traceback("Cannot initialize spec; already initialized", 3), 2)
 	end

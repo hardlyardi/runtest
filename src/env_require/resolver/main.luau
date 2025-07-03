@@ -18,14 +18,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ]]
+--[[
+--FOR DESCRIPTIONS OF API & CODE FUNCTION, ETC: https://light.ardi.gg/
+--FOR ISSUES, BUG REPORTS, OR FEATURE REQUESTS: https://light.ardi.gg/github
+--ROBLOX OSS SERVER: https://discord.com/invite/5KjV64PA3d
+--MY DISCORD (please only contact for important questions): https://discord.com/users/331399684415553538/
+]]
 local ALIAS_PATTERN = `^@(.+)`
 local FILENAME_PATTERN = `[/\\]?([^/\\]+)$`
 
-local filesystem_path = require("../utils/filesystem_path")
+local filesystem_path = require("../../utils/filesystem_path/main")
 local get_aliases = require("@self/get_aliases")
-local pretty_print = require("../utils/pretty_print/main")
+local pretty_print = require("../../utils/pretty_print/main")
 local process = require("@lune/process")
-local resolver_types = require("@self/types")
+local resolver_types = require("./types")
 
 type RequireAliases = resolver_types.RequireAliases
 type ResolverResult = resolver_types.ResolverResult

@@ -18,6 +18,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ]]
+--[[
+--FOR DESCRIPTIONS OF API & CODE FUNCTION, ETC: https://light.ardi.gg/
+--FOR ISSUES, BUG REPORTS, OR FEATURE REQUESTS: https://light.ardi.gg/github
+--ROBLOX OSS SERVER: https://discord.com/invite/5KjV64PA3d
+--MY DISCORD (please only contact for important questions): https://discord.com/users/331399684415553538/
+]]
 local DEFAULT_EPSILON = 0.0001
 
 local colorful = require("../../utils/colorful")
@@ -71,8 +77,9 @@ Checks equality with `left == right`
 function test_interface.expect_exactly_equal<Left, Right>(self: TestInterface, left: Left, right: Right): ()
 	if luau_eq.check(left, right) then return end
 
+	local line = debug.info(2, "l")
 	self:fail(
-		red_bright("\nExpected left to exactly equal right.")
+		red_bright(`\n[{line}]: Expected left to exactly equal right.`)
 			--[[
 			Luau
 			]]
@@ -87,8 +94,9 @@ Checks equality with `not(left == right)`
 function test_interface.expect_not_exactly_equal<Left, Right>(self: TestInterface, left: Left, right: Right): ()
 	if not luau_eq.check(left, right) then return end
 
+	local line = debug.info(2, "l")
 	self:fail(
-		red_bright("\nExpected left to NOT exactly equal right.")
+		red_bright(`\n[{line}]: Expected left to NOT exactly equal right.`)
 			--[[
 			Luau
 			]]
@@ -114,8 +122,9 @@ function test_interface.expect_equal<Left, Right>(
 	epsilon = epsilon or DEFAULT_EPSILON
 	if epsilon_eq.check(left, right, epsilon) then return end
 
+	local line = debug.info(2, "l")
 	self:fail(
-		red_bright(`\nExpected left to differ from right within a threshold of {epsilon}.`)
+		red_bright(`\n[{line}]: Expected left to differ from right within a threshold of {epsilon}.`)
 			--[[
 			Luau
 			]]
@@ -140,8 +149,9 @@ function test_interface.expect_not_equal<Left, Right>(
 ): ()
 	if not epsilon_eq.check(left, right, epsilon or DEFAULT_EPSILON) then return end
 
+	local line = debug.info(2, "l")
 	self:fail(
-		red_bright(`\nExpected left to have more than {epsilon} difference from right.`)
+		red_bright(`\n[{line}]: nExpected left to have more than {epsilon} difference from right.`)
 			--[[
 			Luau
 			]]
@@ -157,10 +167,10 @@ other: true
 ]=]
 function test_interface.expect_truthy<Value>(self: TestInterface, value: Value): ()
 	if value then return end
-
+	local line = debug.info(2, "l")
 	self:fail(
-		red_bright(`\nExpected value to be truthy.`)
-			.. `\nVALUE:\n{INDENT}{indent_newlines(style_str(value :: any))}`
+		red_bright(`\n[{line}]: Expected value to be truthy.`)
+			.. ` VALUE:\n{INDENT}{indent_newlines(style_str(value :: any))}`
 	)
 end
 
@@ -171,10 +181,10 @@ other: false
 ]=]
 function test_interface.expect_falsy<Value>(self: TestInterface, value: Value): ()
 	if not value then return end
-
+	local line = debug.info(2, "l")
 	self:fail(
-		red_bright(`\nExpected value to be falsy.`)
-			.. `VALUE:\n{INDENT}{indent_newlines(style_str(value :: any))}`
+		red_bright(`\n[{line}]: Expected value to be falsy.`)
+			.. ` VALUE:\n{INDENT}{indent_newlines(style_str(value :: any))}`
 	)
 end
 

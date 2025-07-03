@@ -39,7 +39,7 @@ end
 
 local function yieldLoop()
 	while true do
-		run(cyield())
+		run((cyield :: any)())
 	end
 end
 

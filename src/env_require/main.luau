@@ -18,9 +18,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ]]
+--[[
+--FOR DESCRIPTIONS OF API & CODE FUNCTION, ETC: https://light.ardi.gg/
+--FOR ISSUES, BUG REPORTS, OR FEATURE REQUESTS: https://light.ardi.gg/github
+--ROBLOX OSS SERVER: https://discord.com/invite/5KjV64PA3d
+--MY DISCORD (please only contact for important questions): https://discord.com/users/331399684415553538/
+]]
 local filesystem = require("@lune/fs")
 local luau = require("@lune/luau")
-local resolver = require("./env_require/resolver")
+local resolver = require("../env_require/resolver/main")
 local resolver_types = require("@self/resolver/types")
 
 type RequireAliases = resolver_types.RequireAliases
@@ -33,6 +39,8 @@ local function _require_constructor(
 ): (string) -> any
 	local require_resolver = resolver_from_path(requiring_path, {
 		"@lune/",
+		"@runtest/env_require",
+		"@runtest/utils",
 	})
 
 	local function TEST_require(requested_path: string): any
