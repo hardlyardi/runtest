@@ -134,7 +134,7 @@ local completed_specs = complete_specs(spec_hierarchy, SPEC_DIRECTORY)
 
 local any_didnt_pass = false
 
-if filesystem.isDir(RESULTS_DIRECTORY) then filesystem.removeDir(RESULTS_DIRECTORY) end
+pcall(filesystem.removeDir, RESULTS_DIRECTORY)
 filesystem.writeDir(RESULTS_DIRECTORY)
 
 for filename, completed_spec in completed_specs do
