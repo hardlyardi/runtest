@@ -47,7 +47,7 @@ return spec.done()
 ```
 
 To make some of the magic happen, a "runner" is needed. Runtest's design scope is to run tests, so, apart from styling,
-you roll your own testing suite:
+you roll your own testing suite. Should look something like this:
 
 ```luau
 local SPEC_DIRECTORY = "./tests/_specs"
