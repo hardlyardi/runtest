@@ -30,18 +30,18 @@ v0.1.1
 ]]
 do
 end
-local colorful = require("@runtest/utils/colorful")
-local filesystem_hierarchy = require("@runtest/utils/filesystem_hierarchy")
-local filesystem_path = require("@runtest/utils/filesystem_path")
-local pretty_print = require("@runtest/utils/pretty_print/main")
-local profile = require("@runtest/bench/profile/main")
-local profile_types = require("@runtest/bench/profile/types")
-local spec_runner = require("@runtest/spec/runner/main")
-local spec_runner_types = require("@runtest/spec/runner/types")
-local spec_types = require("@runtest/spec/types")
-local table_merge = require("@runtest/utils/table_merge")
-local test = require("@runtest/spec/test/main")
-local test_types = require("@runtest/spec/test/types")
+local colorful = require("@self/utils/colorful")
+local filesystem_hierarchy = require("@self/utils/filesystem_hierarchy")
+local filesystem_path = require("@self/utils/filesystem_path/main")
+local pretty_print = require("@self/utils/pretty_print/main")
+local profile = require("@self/bench/profile/main")
+local profile_types = require("@self/bench/profile/types")
+local spec_runner = require("@self/spec/runner/main")
+local spec_runner_types = require("@self/spec/runner/types")
+local spec_types = require("@self/spec/types")
+local table_merge = require("@self/utils/table_merge")
+local test = require("@self/spec/test/main")
+local test_types = require("@self/spec/test/types")
 
 export type SpecRunner = spec_runner_types.SpecRunner
 export type LoadedSpec = spec_types.LoadedSpec
@@ -65,7 +65,8 @@ return {
 		},
 	},
 	util = {
-		style = table_merge.union(pretty_print, table.clone(colorful)),
+		style = table_merge.union({ print = pretty_print }, table.clone(colorful)),
+
 		filesystem_path = filesystem_path,
 		filesystem_hierarchy = filesystem_hierarchy,
 	},
