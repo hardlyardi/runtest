@@ -51,7 +51,8 @@ return spec.done()
 ```
 
 To make some of the magic happen, a "runner" is needed. Runtest's design scope is pretty much.. to run tests, so, apart
-from styling, you need to roll your own testing suite. Should look something like this:
+from styling, you need to roll your own testing suite. You can create a spec with `runtest.run.spec(filename, name)`,
+and run it with spec:run(). If you want a small template runner, it could look something like this:
 
 ```luau
 local SPEC_DIRECTORY = "./tests/_specs"
