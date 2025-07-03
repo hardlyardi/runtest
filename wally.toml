@@ -1,6 +1,6 @@
 [package]
 name = "hardlyardi/runtest"
-version = "0.0.1-test2"
+version = "0.0.1-test3"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 license = "MIT"
